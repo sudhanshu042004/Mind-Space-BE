@@ -6,4 +6,10 @@ export const SignupZod = z.object({
   password: z.string().min(8).max(20).nonempty(),
 })
 
+export const LoginZod = z.object({
+  email: z.string().nonempty(),
+  password: z.string().min(8).max(20).nonempty(),
+})
+
 export type SignupType = z.infer<typeof SignupZod>
+export type LoginType = z.infer<typeof LoginZod>
