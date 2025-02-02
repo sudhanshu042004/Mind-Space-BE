@@ -5,13 +5,12 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import { user } from "../db/schema";
 import jwt from "jsonwebtoken"
 import { eq } from "drizzle-orm";
-import { middleware } from "../middleware";
 
 export const signup = express.Router();
 
 const db = drizzle(process.env.DATABASE_URL!);
 
-signup.post('/', middleware, async (req, res) => {
+signup.post('/', async (req, res) => {
   const body: SignupType = req.body;
   try {
     // validating data
@@ -57,7 +56,7 @@ signup.post('/', middleware, async (req, res) => {
       "message": "user successfully created"
     })
   } catch (e) {
-    console.log(e);
+    console.error(e);
     res.status(500).json({
       "message": "something went wrong"
     })

@@ -26,11 +26,12 @@ export const middleware = async (req: Request, res: Response, next: NextFunction
 
   try {
     const publicKey = await Bun.file("src/secret/public.key").text();
-    const isAuthentic = jwt.verify(sessionCookie, publicKey, { algorithms: ["RS256"] })
-    // isAuthentic  check
-
+    const isAuthentic: JwtPayload = jwt.verify(sessionCookie, publicKey, { algorithms: ["RS256"] }) as JwtPayload
+    const userId = isAuthentic.userId;
+    req.userId = userId;
+    next()
   } catch (e) {
-    console.log(e);
+    console.error(e);
     res.status(401).json({
       "message": "unauthorized"
     })

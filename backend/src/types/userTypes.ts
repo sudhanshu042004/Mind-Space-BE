@@ -6,6 +6,11 @@ export const SignupZod = z.object({
   password: z.string().min(8).max(20).nonempty(),
 })
 
+export const UserZod = z.object({
+  name: z.string().optional(),
+  avatar: z.string().optional(),
+})
+
 export const LoginZod = z.object({
   email: z.string().nonempty(),
   password: z.string().min(8).max(20).nonempty(),
