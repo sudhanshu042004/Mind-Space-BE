@@ -53,7 +53,8 @@ signup.post('/', async (req, res) => {
 
     //send cookie
     res.status(200).cookie("session", token, { expires: week, }).json({
-      "message": "user successfully created"
+      "message": "user successfully created",
+      "session": token
     })
   } catch (e) {
     console.error(e);

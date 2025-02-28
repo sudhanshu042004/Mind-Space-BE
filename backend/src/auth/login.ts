@@ -47,7 +47,8 @@ login.post("/", async (req, res) => {
     const week = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
 
     res.status(200).cookie("session", token, { expires: week }).json({
-      "message": "user successfully login"
+      "message": "user successfully login",
+      "session": token
     })
 
   } catch (e) {
