@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package unary;
+
+service Unary {
+    rpc GetServerResponse (Request) returns (Response) {}
+    rpc GetMoodScore (JournalText) returns (MoodScore) {}
+}
+
+
+message JournalText {
+  string text = 1;
+}
+
+message Request {
+    string name =1;
+}
+
+message Response {
+    string message =1;
+    bool recieved = 2;
+  }
+
+message MoodScore {
+  int32 AnxietyLevel = 1;
+  int32 LowMoodLevel = 2;
+  int32 ContentmentLevel =3;
+  int32 FrustrationLevel = 4;
+  int32 ExcitementLevel = 5;
+}
+
