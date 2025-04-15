@@ -30,7 +30,7 @@
   },
   "scripts": {
     "dev": "nodemon",
-    "start" : "bun run src/server.ts"
+    "start" : "bun run src/index.ts"
 
   }
 }
