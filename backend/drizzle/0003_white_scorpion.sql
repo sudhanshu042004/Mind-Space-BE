@@ -1,0 +1,1 @@
+ALTER TABLE "moodScore" ADD COLUMN "createdAt" date DEFAULT now();

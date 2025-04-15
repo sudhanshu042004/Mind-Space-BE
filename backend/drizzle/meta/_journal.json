@@ -15,6 +15,27 @@
       "when": 1738402681892,
       "tag": "0001_user",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1744612419482,
+      "tag": "0002_busy_rogue",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1744612871817,
+      "tag": "0003_white_scorpion",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1744632737476,
+      "tag": "0004_friendly_spectrum",
+      "breakpoints": true
     }
   ]
 }
