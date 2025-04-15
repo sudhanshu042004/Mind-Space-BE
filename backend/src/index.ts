@@ -4,6 +4,15 @@ import { login } from "./auth/login";
 import { userRoute } from "./user/getUser";
 import { MoodScore } from "./Rag/MoodScore";
 
+const port = process.env.PORT!;
+
+let correctPort: number;
+
+if (typeof port === "string") {
+  correctPort = parseInt(port)
+} else {
+  correctPort = port
+}
 const app = express();
 app.use(express.json())
 
@@ -17,4 +26,4 @@ app.use("/login", login)
 app.use("/user", userRoute)
 app.use('/moodScore', MoodScore)
 
-app.listen(8080, () => console.log("server is listening at port 8080"))
+app.listen(correctPort, () => console.log(`server is listening at port ${correctPort}`))
