@@ -4,6 +4,7 @@ import time
 import mindSpace_pb2_grpc as pb2_grpc
 import mindSpace_pb2 as pb2
 from journal_text.mood_score import retrive_moodScore
+import os
 from journal_text.mood_score import retrieve_feedback
 
 
@@ -44,9 +45,10 @@ class UnaryService(pb2_grpc.UnaryServicer):
 
 
 def serve():
+    port = os.getenv("PORT", "50051")
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     pb2_grpc.add_UnaryServicer_to_server(UnaryService(), server)
-    server.add_insecure_port("[::]:50051")
+    server.add_insecure_port(f"[::]:{port}")
     server.start()
     print("server started at 50051")
     server.wait_for_termination()
