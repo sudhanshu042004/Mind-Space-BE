@@ -1,17 +1,23 @@
 # Use official Python image
 FROM python:3.12-slim
 
-# Set working directory inside container
+# Set working directory
 WORKDIR /app
 
-# Copy your Python project files into the container
-COPY . .
+# Copy requirements
+COPY requirements.txt .
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt grpcio-tools
 
-# Expose the port your app will run on (optional hint)
-EXPOSE 8000
+# Copy everything else
+COPY . .
 
-# Run your Python app
+# Generate gRPC Python files
+RUN python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. ./proto/mindSpace.proto
+
+# Expose the port your gRPC server will run on
+EXPOSE 50051
+
+# Run the server
 CMD ["python", "server.py"]
