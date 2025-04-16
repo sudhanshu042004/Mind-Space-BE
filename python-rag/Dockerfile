@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt grpcio-tools
 COPY . .
 
 # Generate gRPC Python files
-RUN python -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. mindSpace.proto
+RUN python -m grpc_tools.protoc -I.  --python_out=. --grpc_python_out=. mindSpace.proto
 
 # Expose the port your gRPC server will run on
 EXPOSE 50051
