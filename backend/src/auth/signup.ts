@@ -44,11 +44,16 @@ signup.post('/', async (req, res) => {
     const result = await db.insert(user).values(newUser).returning({ userId: user.id })
     const userId = result[0].userId;
 
-    const privateKey = await Bun.file("src/secret/private.key").text();
+    const secretKey = process.env.SECRET!;
+    if (!secretKey) {
+      res.status(500).json({
+        message: "there is no token secretKey"
+      })
+    }
     const payload = { userId: userId };
 
     //token genrate
-    const token = jwt.sign(payload, privateKey, { expiresIn: '7d', algorithm: "RS256" })
+    const token = jwt.sign(payload, secretKey, { expiresIn: '7d' })
     const week = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
 
     //send cookie

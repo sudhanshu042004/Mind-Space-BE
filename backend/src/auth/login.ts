@@ -40,10 +40,16 @@ login.post("/", async (req, res) => {
       return;
     }
 
+    const secretKey = process.env.SECRET!;
+    if (!secretKey) {
+      res.status(500).json({
+        message: "there is no token secretKey"
+      })
+    }
     const payload = { userId: userId };
-    const privateKey = await Bun.file("src/secret/private.key").text();
 
-    const token = jwt.sign(payload, privateKey, { algorithm: "RS256", expiresIn: "7d" })
+    //token genrate
+    const token = jwt.sign(payload, secretKey, { expiresIn: '7d' })
     const week = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
 
     res.status(200).cookie("session", token, { expires: week }).json({
