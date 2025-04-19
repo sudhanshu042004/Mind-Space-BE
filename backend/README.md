@@ -43,7 +43,7 @@ openssl rsa -pubout -in src/secret/private.key -out src/secret/public.key
 ```sh
 bun start
 ```
-Server will start on **`http://localhost:8080`**.
+Server will start on **`http://localhost:3000`**.
 
 ---
 
